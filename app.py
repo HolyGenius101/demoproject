@@ -20,7 +20,7 @@ def analyze_sentiment_batch(texts):
     with torch.no_grad():
         output = model(**encoded)
     scores = F.softmax(output.logits, dim=1).numpy()
-    sentiments = [labels[s.argmax()] for s in scores]
+    sentiments = [labels[s.argmax()] + f" ({s[2] - s[0]:.2f})" for s in scores]  # label + score
     sentiment_scores = [float(s[2] - s[0]) for s in scores]  # positive - negative
     return sentiments, sentiment_scores
 
