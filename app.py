@@ -20,7 +20,7 @@ def analyze_sentiment_batch(texts):
     with torch.no_grad():
         output = model(**encoded)
     scores = F.softmax(output.logits, dim=1).numpy()
-    sentiments = [labels[s.argmax()] for s in scores]
+    sentiments = [labels[s.argmax()] + f" ({s[2] - s[0]:.2f})" for s in scores]  # label + score
     sentiment_scores = [float(s[2] - s[0]) for s in scores]  # positive - negative
     return sentiments, sentiment_scores
 
@@ -44,9 +44,9 @@ def fetch_bing_headlines(topic, date, seen_global, limit):
     return headlines_links
 
 # Streamlit UI
-st.set_page_config(page_title="Smart Roadmap", layout="centered")
-st.title("\U0001F4CA Smart Roadmap for Social Movements")
-st.markdown("Analyze emotional turning points in news headlines")
+st.set_page_config(page_title="Crossroads Sentiment Tracker", layout="centered")
+st.title("🛤️ Crossroads: Sentiment Trends in News Over Time")
+st.markdown("Analyze how public sentiment evolves in news headlines and discover emotional crossroads around major topics.")
 
 # User inputs
 topic = st.text_input("Enter a topic (e.g. climate change, AI):", "climate change")
