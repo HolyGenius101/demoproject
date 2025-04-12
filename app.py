@@ -45,8 +45,8 @@ def fetch_bing_headlines(topic, date, seen_global, limit):
 
 # Streamlit UI
 st.set_page_config(page_title="Smart Roadmap", layout="centered")
-st.title("\U0001F4CA Smart Roadmap for Social Movements")
-st.markdown("Analyze emotional turning points in news headlines")
+st.title("\U0001F4CA CrossViews: A Smart Roadmap for Major Topics Over Time")
+st.markdown("Analyze trends of sentiments in news headlines and see CROSSROADS of changes in public opinion.")
 
 # User inputs
 topic = st.text_input("Enter a topic (e.g. climate change, AI):", "climate change")
